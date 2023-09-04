@@ -1,6 +1,7 @@
 package com.example.spring.data.fhir.repository.support;
 
 import ca.uhn.fhir.rest.client.api.IGenericClient;
+import com.example.spring.data.fhir.query.FHIRQueryLookupStrategy;
 import org.springframework.data.repository.core.EntityInformation;
 import org.springframework.data.repository.core.RepositoryInformation;
 import org.springframework.data.repository.core.RepositoryMetadata;
@@ -46,6 +47,6 @@ public class FhirRepositoryFactory extends RepositoryFactorySupport {
     @Override
     protected Optional<QueryLookupStrategy> getQueryLookupStrategy(QueryLookupStrategy.Key key,
                                                                    QueryMethodEvaluationContextProvider evaluationContextProvider) {
-        return super.getQueryLookupStrategy(key, evaluationContextProvider);
+        return Optional.of(new FHIRQueryLookupStrategy(fhirClient));
     }
 }
